@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="Scenario.css" />
+    <title>BookingPage</title>
+    <style>
+        article {
+            display: flex;
+        }
+    </style>
+    <style>
+        body {
+            width: 320;
+            height: 480;
+            margin: 20, auto;
+        }
+
+        #calWrapper {
+            width: 100%;
+            margin: 0 5;
+            border: 1px solid #ccc;
+        }
+
+        .dayCell {
+            width: 40px;
+            height: 40px;
+            font-size: 11px;
+            vertical-align: top;
+            text-align: right;
+            background-color: aliceblue;
+        }
+
+        .dayHeader {
+            width: 40px;
+            height: 20px;
+            background-color: #ddd;
+        }
+
+        .today {
+            border: 2px solid blue;
+        }
+
+        .picked {
+            border: 2px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <header>
+            <h1>Make a Booking Now</h1>
+        </header>
+    </div>
+    <header>
+        <nav>
+            <ul>
+                <li id="homePageLink"><a href="homePage.html">Home</a></li>
+                <li id="BookingPageLink"><a href="BookingPage.html">Booking</a></li>
+                <li id="ContactPagetPageLink"><a href="ContactPage.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div>
+        <h2>Price</h2>
+        <div class="quarter">
+            <h3>
+                2021
+            </h3>
+            <p>
+                * 1st September - 18th December --- $270 per night <br />
+                * 19th December – 31st December --- $250 per night <br />
+            </p>
+        </div>
+        <div class="quarter">
+            <h3>2022 </h3>
+            <p>
+                * 1st January - – 31st January --- $250 per night <br />
+                * 1st February - 31st May --- $220 per night <br />
+                * 1st June - 31st August --- $200 per night <br />
+            </p>
+        </div>
+        <div class="quarter">
+            <h3>Month view for <span id="dateHolder" /></h3>
+
+            <table id="calWrapper">
+            </table>
+        </div>
+        <div>
+            <img src="wwwroot/image/ocean_beach_2.jpg" alt="choose us">
+        </div>
+        <div>
+            <h2>Please choose booking date</h2>
+
+            <select id="myDropdown"></select>
+            <button onclick="addDate()">Add Date</button>
+            <br />
+            <select id="myDropdown2"></select>
+            <button onclick="displayDates()">Display Dates</button>
+            <button onclick="removeDate()">Remove selected date</button>
+            <p id="demo"></p>
+        </div>
+
+    </div>
+    <script type="text/javascript">function replyClick(clicked_id) {
+            var ele = document.getElementById(clicked_id);
+            if (ele.classList.contains('picked')) {
+                ele.classList.remove("picked")
+            } else {
+                ele.classList.add("picked")
+            }
+        }
+
+        (function () {
+            var today = new Date();
+            var month, day, year, firstDay;
+            month = today.getMonth();
+            day = today.getDate();
+            year = today.getFullYear();
+
+            firstDay = new Date(year, month, 1);
+
+            var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+            function displayDate() {
+                var holder = document.getElementById("dateHolder");
+                holder.innerText = months[month] + ' ' + year;
+            }
+
+            function createDayHeaders() {
+                var wrapper = document.getElementById("calWrapper");
+                var row = document.createElement("tr");
+                for (var i = 0; i < days.length; i++) {
+                    var el = document.createElement("th");
+                    el.setAttribute("class", "dayHeader");
+                    el.innerText = days[i];
+                    row.appendChild(el);
+                }
+                wrapper.appendChild(row);
+            }
+
+
+
+            function createDayCells() {
+                var dayOne = firstDay.getDay();
+                var iDay = 0;
+                var wrapper = document.getElementById("calWrapper");
+                var lastDay = new Date(year, month + 1, 0).getDate();
+
+                j = 0;
+                while (iDay < lastDay) {
+                    var row = document.createElement("tr");
+
+                    for (var i = 0; i < days.length; i++) {
+
+                        var el = document.createElement("td");
+
+                        if (dayOne === i || iDay > 0) {
+                            if (day === iDay)
+                                el.setAttribute("class", "dayCell today");
+                            else
+                                el.setAttribute("class", "dayCell");
+                            el.setAttribute("id", "day" + j);
+                            el.setAttribute("onClick", "replyClick(this.id)");
+
+                            if (iDay < lastDay)
+                                iDay++;
+                            else
+                                break;
+                            el.innerText = iDay;
+                        }
+                        row.appendChild(el);
+                        j++;
+                    }
+                    wrapper.appendChild(row);
+                }
+
+            }
+
+            displayDate(today);
+            createDayHeaders();
+            createDayCells();
+        })();</script>
+    <script type="text/javascript" src="BookingJs.js"></script>
+    <footer>
+        <p id="end">Please follow our social media</p>
+        <img src="wwwroot/image/facebook_small.png" alt="Facebook" style="width:3%" />
+        <img src="wwwroot/image/instagram_small.png" alt="Instagram" style="width:3%" />
+        <img src="wwwroot/image/youtube-variation_small.png" alt="youtube" style="width:3%" />
+        <img src="wwwroot/image/twitter_small.png" alt="twitter" style="width:3%" />
+        <img src="wwwroot/image/paypal_small.png" alt="paypal" style="width:3%" />
+    </footer>
+
+</body>
+
+</html>

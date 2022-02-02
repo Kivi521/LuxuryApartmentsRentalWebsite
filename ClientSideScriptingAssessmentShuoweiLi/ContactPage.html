@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="Scenario.css" />
+    <title>contact Page</title>
+    <style>
+
+        form {
+            float: right;
+            position: absolute;
+            right: 10%;
+            bottom: 45%;
+        }
+
+        form {
+            width: 430px;
+            margin: 0 auto;
+            background-color: #abf4a2;
+            border：10px;
+            border-radius: 5px;
+            padding: 30px;
+            box-shadow: 7px 7px 3px #c8f0c3;
+        }
+
+        label {
+            display: inline-block;
+            width: 80px;
+        }
+
+        input {
+            width: 240px;
+        }
+
+            input[type=submit],
+            input[type=reset] {
+                width: 122px;
+                height: 50px;
+            }
+
+            input[type=submit] {
+                margin-left: 83px;
+            }
+
+            input:focus {
+                background-color: #e0f4f3;
+            }
+    </style>
+</head>
+
+<body>
+    <div>
+        <header>
+            <h1>Contact Us</h1>
+        </header>
+    </div>
+    <header>
+        <nav>
+
+            <ul>
+                <li id="homePageLink"><a href="homePage.html">Home</a></li>
+                <li id="BookingPageLink"><a href="BookingPage.html">Booking</a></li>
+                <li id="ContactPagetPageLink"><a href="ContactPage.html">Contact</a></li>
+            </ul>
+
+        </nav>
+    </header>
+
+    <p id="p1">
+        Contact number:0435 123 456<br />Address:42 Holyrood Avenue Sorrento VIC
+        3943<br />Email-address:apartmentrenting@gmail.com
+    </p>
+    <img src="wwwroot/image/Address.png" alt="map" style="width:40%">
+
+    
+    <form action="ThankyouPage.html" method="get" id="contactForm">
+        <label id="lblName" for="txtName">Name:</label>
+        <input id="txtName" type="text" class="valid" /><span id="txtName_Help"></span>
+        <br />
+        <label id="lblEmail" for="txtEmail">Email:</label>
+        <input id="txtEmail" type="text" class="valid" /><span id="txtEmail_Help"></span>
+        <br />
+        <label id="lblPhone" for="txtPhone">PhoneNo:</label>
+        <input id="txtPhone" type="text" class="valid" /><span id="txtPhone_Help"></span>
+        <br />
+        <label for="txtGender">Gender:</label>
+        <input id="txtGender" type="text" list="Gender" /><span id="txtGender_Help"></span>
+        <datalist id="Gender">
+            <option value="Male"></option>
+            <option value="Female"></option>
+        </datalist>
+        <br />
+        
+        <textarea id="txtLeaveMes" rows="4" cols="39" name="comment">Leave us your message here</textarea><span id="txtLeaveMes_Help"></span><br />
+
+        <input type="submit" />
+        <input type="reset" />
+    </form>
+    <script type="text/javascript" src="ValidateJs.js"></script>
+    <footer>
+        <p id="end">Please follow our social media</p>
+        <img src="wwwroot/image/facebook_small.png" alt="Facebook" style="width:3%" />
+        <img src="wwwroot/image/instagram_small.png" alt="Instagram" style="width:3%" />
+        <img src="wwwroot/image/youtube-variation_small.png" alt="youtube" style="width:3%" />
+        <img src="wwwroot/image/twitter_small.png" alt="twitter" style="width:3%" />
+        <img src="wwwroot/image/paypal_small.png" alt="paypal" style="width:3%" />
+    </footer>
+</body>
+
+</html>

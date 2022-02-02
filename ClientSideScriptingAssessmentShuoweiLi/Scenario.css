@@ -1,0 +1,84 @@
+﻿body {
+}
+
+@media screen {
+    body {
+        background-image: url('wwwroot/image/back_beach.jpg');
+        background-size: 1920px 100px;
+        background-repeat: no-repeat;
+        background-position: top;
+    }
+
+    .quarter {
+        float: left;
+        width: 24.44444%;
+        padding:0 8px;
+        column-rule:4px;
+        column-rule-color:aqua;
+        
+    }
+
+    h1 {
+        text-align: center;
+        font-family: Helvetica, Calibri, suitable default;
+        color: #87423c;
+    }
+    h3 {
+        color: #4d1d18;
+        text-size-adjust: 24px;
+    }
+    p{
+        line-height:150%;
+
+    }
+    header{
+        background:
+    }
+
+   
+    /* navigation styles */
+    nav ul {
+        list-style: none;
+        text-align: center;
+        padding-left: 0px;
+    }
+
+    nav li {
+        color: #4d1d18;
+        display: inline-block;
+        width: 25%;
+        border-right: 5px solid #aaaaaa;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    nav li:last-child{
+        border-right:none;
+    }
+
+        
+    /* links state */
+    nav a:link {
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #555;
+    }
+
+    nav a:visited {
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #555;
+    }
+
+    nav a:hover {
+        text-decoration: underline;
+    }
+
+  
+}
+
+@media print {
+    nav {
+        display: none;
+    }
+}

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: BookingJs.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: BookingJs.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>﻿/** Instantiate date */
+
+var date = new Date();
+
+/** set firs day and last day which allowed choose for customer */
+
+var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);//1-Nov-2021
+
+var lastDay = new Date(date.getFullYear(), date.getMonth() + 2, 31);//31-Jan-2022
+
+
+while (firstDay &lt;= lastDay) {
+    var opt = document.createElement("option");/** this is an optional element: &lt;option>&lt;/option> */
+
+    var text = document.createTextNode(firstDay);/** 1-Nov-2021 */
+
+    opt.appendChild(text); /** &lt;option>1-Nov-2021&lt;/option> */ 
+
+    document.getElementById("myDropdown").appendChild(opt);/** &lt;select>&lt;option>1-Nov-2021&lt;/option>&lt;/select> */
+
+    firstDay.setDate(firstDay.getDate() + 1)/** set first day */
+}
+
+/** Class representing date and price.
+ * @constructor
+ */
+
+class DatePrice {
+    constructor(d) { /** d - string date */
+
+        this.d = new Date(d);/**  this.d - date object */
+
+        this.p = this.getPrice();/**  $270 or &amp;250 */
+        
+
+    }
+   /** getPrice method is for distinguishing different price for different dates */
+
+    getPrice() {
+        if (this.d.getDate() &lt;= (2021, 12, 18)) { /**  1-Nov-2o21 --- 18-Dec-2021 fee is: $270 per night */
+
+            return 270;
+        }
+        else  { /**  18-Dec-2021 --- 31-Jan-2022 fee is $250 per night */
+
+            return 250;
+        }
+        
+    }
+}
+/** Array selectedDates to store selected dates */
+
+let selectedDates = new Array();
+
+/** @founction addDate
+ * is for adding selected by the customer to selectedDates array */
+
+function addDate() {
+
+/** get the date selected from myDropdown selecet element */
+
+    let selectedD = document.getElementById("myDropdown").value;
+/** add the selected date as a DatePrice obj to the array */
+
+    selectedDates.push(new DatePrice(selectedD));
+
+    selectedDates.sort(compare);
+
+
+}
+
+/**
+ * Function to sort the date by order
+ * Function compare
+ * @param {string} a - date a;
+ * @param {string} b - date b
+ * @returns comparison
+ */
+
+function compare(a, b) {
+    const dateA = a.d;
+    const dateB = b.d;
+
+    let comparison = 0;
+    if (dateA > dateB) {
+        comparison = 1;
+    } else if (dateA &lt; dateB) {
+        comparison = -1;
+    }
+    return comparison;
+}
+
+
+/** @ function displayDates,
+ * for achieveing this function: when press display button, the montor will show total price */
+
+function displayDates() {
+    let total = 0;
+    document.getElementById("myDropdown2").innerHTML = "";
+    for (var i = 0; i &lt; selectedDates.length; i++) {
+        var opt = document.createElement("option");
+        var text = document.createTextNode(selectedDates[i].d);
+        opt.appendChild(text);
+        document.getElementById("myDropdown2").appendChild(opt);
+        total += selectedDates[i].p;
+    }
+    document.getElementById("demo").innerHTML = total;
+}
+
+
+/**
+ * @Function binarySearch
+ * to do the binary search of selected dates and delete the date
+ * Function binarySearch
+ * @param {string} date - The date to be deleted
+ * @param {list} list - the list of selected dates
+ * @return position
+ */
+
+function binarySearch(date, list) {
+    let first = 0;
+    let last = list.length - 1;
+    let position = -1;
+    let found = false;
+    let middle;
+
+    while (found === false &amp;&amp; first &lt;= last) {
+        middle = Math.floor((first + last) / 2);
+        if (list[middle].date == date) {
+            found = true;
+            position = middle;
+        }
+        else if (list[middle].name > name) {
+            last = middle - 1;
+        }
+        else {
+            first = middle + 1;
+        }
+    }
+    return position;
+}
+
+
+/**@function removeDate
+ * for achieveing this function by binarySearch function: when press remove button, the selected date will be removed
+ * */
+
+function removeDate() {
+
+    //get the position/index of selected item in myDropdown2
+
+    //let index = document.getElementById("myDropdown2").selectedIndex;
+
+    //update the total price
+
+    let searchDate = document.getElementById("myDropdown2").selected;
+    let posFound = binarySearch(searchDate, selectedDates);
+
+    let currTotal = document.getElementById("demo").innerHTML;
+    currTotal -= selectedDates[posFound].p;
+    document.getElementById("demo").innerHTML = currTotal;
+
+/** remove the date from array */
+
+    selectedDates.splice(posFound, 1);
+
+/** remove the date from myDropdown2 */
+
+    document.getElementById("myDropdown2").remove(posFound);
+
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DatePrice.html">DatePrice</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addDate">addDate</a></li><li><a href="global.html#binarySearchtodothebinarysearchofselecteddatesanddeletethedateFunctionbinarySearch">binarySearchto do the binary search of selected dates and delete the dateFunction binarySearch</a></li><li><a href="global.html#compare">compare</a></li><li><a href="global.html#date">date</a></li><li><a href="global.html#displayDates">displayDates</a></li><li><a href="global.html#firstDay">firstDay</a></li><li><a href="global.html#removeDateforachieveingthisfunctionbybinarySearchfunction:whenpressremovebutton,theselecteddatewillberemoved">removeDatefor achieveing this function by binarySearch function: when press remove button, the selected date will be removed</a></li><li><a href="global.html#selectedDates">selectedDates</a></li><li><a href="global.html#text">text</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Mon Nov 15 2021 20:58:42 GMT+1100 (Australian Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
